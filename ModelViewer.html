@@ -1,0 +1,71 @@
+<!doctype html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>RGTI 1. assignment</title>
+		<meta name="description" content="The assignment shows the object read from file and transforms it by users input.">
+		<meta name="Tadej Hiti" content="3D model viewer">
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="script.js" type="text/javascript"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.3.2/gl-matrix-min.js" type="text/javascript" ></script>
+
+		<style>
+			#container {
+				display: flex;
+			}
+			#UI {
+				width: 30vw;
+				text-align: center;
+				font-family: Monospace;
+				padding-top: 5vh;
+			}
+			#fileRead {
+				padding-left: 5vw;
+				padding-bottom: 5vh;
+			}
+			#main {
+				flex-grow: 1;
+			}
+			#canvas {
+				margin-top: 1vh; 
+				border-style: dotted;
+				border-color: #b7b7b7;
+				border-width: 2px;
+			}
+			#controls {
+				text-align: center;
+				font-family: Monospace;
+			}
+			#file {
+				font-family: Monospace;	
+			}
+			#alert {
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+	<div id="container">
+		<div id="UI">
+			<div id ="fileRead">
+			    <input type="file" id="file" onchange="readFile(this)">
+			</div>
+			<p id="controls">Controls: </p>
+			<p> Rotation X axis: <b>W, S</b> keys </p>
+			<p> Rotation Y axis: <b>A, D</b> keys </p>
+			<p> Rotation Z axis: <b>Q, E</b> keys </p>
+			<p> Translate X axis: <b>left, right</b> keys </p>
+			<p> Translate Y axis: <b>up, down</b> keys </p>
+			<p> Translate Z axis: <b>ALT + up, down</b> keys </p>
+			<p> Scale: <b>SHIFT + up, down</b> keys </p>
+			<br>
+			<p id="alert"></p>
+		</div>
+		<div id="main">
+			<canvas id="canvas" name="canvas"></canvas>
+		</div>
+	</div>
+	</body>
+</html>
