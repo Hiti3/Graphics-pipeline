@@ -26,7 +26,7 @@ function readFile(input) {
 	    				if (j > 0)
 		      				tmp.push(parseFloat(coordinates[j]));		
 		  			}
-		  			vertices[i] = tmp;
+		  			vertices.push(tmp);
 				}
 				if (line[0] == "f") {
 			  		var tmp = [];
