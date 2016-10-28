@@ -5,6 +5,25 @@ var canvas; var ctx;
 var doDraw = true;
 
 var rotation; var scale; var translation;
+var defaultFile;
+
+// onDocumentReady function
+$(function() {
+    getCanvas();
+    setCanvasSize();
+    requestFile(document.getElementById("default").value);
+
+	document.getElementById("myList").onchange = function() {
+	  requestFile(this.value);
+	  document.getElementById("file");
+	};
+});
+
+function requestFile(fileName) {
+	$.get(fileName, function(data) {
+		parseFile(data);
+  	});
+}
 
 function readFile(input) {
 	var file;
@@ -14,32 +33,40 @@ function readFile(input) {
 	if (file) {
 		var reader = new FileReader();
 		reader.onload = function() {
-			var lines = this.result.split('\n');
-			var line;
-			var coordinates;
-			for (var i = 0; i < lines.length; i++) {
-				line = lines[i];
-				coordinates = line.split(" ");
-				if (line[0] == "v") {
-		  			var tmp = [];
-		  			for (var j = 0; j < coordinates.length; j++) {
-	    				if (j > 0)
-		      				tmp.push(parseFloat(coordinates[j]));		
-		  			}
-		  			vertices.push(tmp);
-				}
-				if (line[0] == "f") {
-			  		var tmp = [];
-			  		for (var j = 0; j < coordinates.length; j++) {
-			    		if (j > 0)
-			      			tmp.push(parseInt(coordinates[j]));
-			  		}
-		  			edges.push(tmp);
-				}
-			}
-		start(); };
-	reader.readAsText(file);
+			parseFile(this.result);
+		};
+		reader.readAsText(file);
 	}
+}
+
+function parseFile(file) {
+	edges = [];
+	vertices = [];
+
+	var lines = file.split('\n');
+	var line;
+	var coordinates;
+	for (var i = 0; i < lines.length; i++) {
+		line = lines[i];
+		coordinates = line.split(" ");
+		if (line[0] == "v") {
+  			var tmp = [];
+  			for (var j = 0; j < coordinates.length; j++) {
+				if (j > 0)
+      				tmp.push(parseFloat(coordinates[j]));		
+  			}
+  			vertices.push(tmp);
+		}
+		if (line[0] == "f") {
+	  		var tmp = [];
+	  		for (var j = 0; j < coordinates.length; j++) {
+	    		if (j > 0)
+	      			tmp.push(parseInt(coordinates[j]));
+	  		}
+  			edges.push(tmp);
+		}
+	}
+	start(); 
 }
 
 function start() {
@@ -281,9 +308,4 @@ $(document).keydown(function(e) {
     if (e.keyCode in keyEvents) {
         keyEvents[e.keyCode] = false;
     }
-});
-
-$(function() {
-    getCanvas();
-    setCanvasSize();
 });

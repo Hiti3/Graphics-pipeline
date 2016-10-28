@@ -16,17 +16,55 @@
 				display: flex;
 			}
 			#UI {
-				width: 30vw;
+				width: 45vw;
 				text-align: center;
 				font-family: Monospace;
 				padding-top: 5vh;
 			}
-			#fileRead {
-				padding-left: 5vw;
-				padding-bottom: 5vh;
-			}
 			#main {
 				flex-grow: 1;
+			}
+			#UI_div {
+				display: flex;
+				margin-right: 25%;
+				margin-bottom: -10px;
+			}
+			#UI_p {
+				flex-grow: 1;
+				text-align: right;
+			}
+			#UI_div2 {
+				display: flex;
+				text-align: center;
+				margin-right: 5%;
+			}
+			#UI_p2 {
+				flex-grow: 1;
+				text-align: right;
+
+			}
+			#fileRead {
+				text-align: left;
+				padding-left: 40px;
+				margin-top: 12px;
+				margin-right: -35px;
+				margin-bottom: 70px;
+			}
+
+			#dropdown {
+				text-align: left;
+				padding: 1px 10px 0 20px;
+				margin-top: 10px;
+			}
+			#controls {
+				text-align: center;
+				font-family: Monospace;
+			}
+			#file {
+				
+			}
+			#alert {
+				color: red;
 			}
 			#canvas {
 				margin-top: 1vh; 
@@ -34,23 +72,27 @@
 				border-color: #b7b7b7;
 				border-width: 2px;
 			}
-			#controls {
-				text-align: center;
-				font-family: Monospace;
-			}
-			#file {
-				font-family: Monospace;	
-			}
-			#alert {
-				color: red;
-			}
 		</style>
 	</head>
 	<body>
 	<div id="container">
 		<div id="UI">
-			<div id ="fileRead">
-			    <input type="file" id="file" onchange="readFile(this)">
+			<div id="UI_div">
+				<p id = "UI_p">Select a predefined model: </p>
+				<div id="dropdown">
+					<form>
+					<select id="myList">
+					  <option id="default" value="pyramid.txt">Pyramid</option>
+					  <option value="teapot.txt">Teapot</option>
+					</select>
+					<form>
+				</div>
+			</div>
+			<div id="UI_div2">
+				<p id="UI_p2">..or upload your own:</p>
+				<div id="fileRead">
+				    <input type="file" id="file" onchange="readFile(this)">
+				</div>
 			</div>
 			<p id="controls">Controls: </p>
 			<p> Rotation X axis: <b>W, S</b> keys </p>
